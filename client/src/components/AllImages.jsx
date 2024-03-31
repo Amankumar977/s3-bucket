@@ -7,7 +7,7 @@ const AllImages = () => {
   const [Uploading, setUploading] = useState(false); // Indicates if an image is currently being uploaded
   const [selectedFile, setSelectedFile] = useState(""); // Stores the selected file for upload
   const [allPosts, setAllPosts] = useState([]); // Stores all the uploaded image data
-
+  const [getImage, setGetImage] = useState(false);
   // Function to handle file selection
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]); // Access the files array and select the first file
@@ -42,6 +42,8 @@ const AllImages = () => {
   // Fetch all images from the backend when selectedFile changes or on component mount
   useEffect(() => {
     let getAllPosts = async () => {
+      setUploading(true);
+      setGetImage(true);
       try {
         // Send a GET request to retrieve all images from the backend
         const response = await axios.get(
@@ -51,6 +53,9 @@ const AllImages = () => {
         setAllPosts(response.data.posts);
       } catch (error) {
         console.log(error.message); // Log any errors that occur during image retrieval
+      } finally {
+        setUploading(false);
+        setGetImage(false);
       }
     };
     getAllPosts();
@@ -101,9 +106,10 @@ const AllImages = () => {
             </div>
           </div>
         )}
-
         {/* Display loader when uploading */}
-        {Uploading && <Loader />}
+        {Uploading && (
+          <Loader text={getImage ? "Loading Images" : "Uploading Images"} />
+        )}
       </div>
     </>
   );

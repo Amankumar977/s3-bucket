@@ -1,7 +1,7 @@
 import React from "react";
 import { Segment, Container } from "semantic-ui-react";
 
-const Loader = () => {
+const Loader = ({ text }) => {
   return (
     <div
       style={{
@@ -20,7 +20,7 @@ const Loader = () => {
               alignItems: "center",
               backgroundColor: "#F4F4F4",
             }}>
-            Uploading Image
+            {text}
           </Segment>
         </Container>
       </div>
