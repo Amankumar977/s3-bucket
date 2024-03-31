@@ -14,7 +14,7 @@ app.use(morgan("tiny")); // Use Morgan middleware with the "tiny" format for log
 app.use(
   cors({
     // Configure CORS middleware
-    origin: [process.env.FRONTEND_URL], // Allow requests only from the specified frontend URL
+    origin: ["https://s3-bucket-qi6q.vercel.app"], // Allow requests only from the specified frontend URL
     httpOnly: true, // Allow only HTTP-only cookies
     secure: true, // Allow only secure requests
   })
